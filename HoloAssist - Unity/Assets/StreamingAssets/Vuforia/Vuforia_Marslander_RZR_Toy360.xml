@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+<Tracking>
+<ModelTarget name="Vuforia_MarsLander" motionHint="static"/>
+<ModelTarget name="Vuforia_RZR_Toy" motionHint="static"/>
+
+</Tracking>
+
+<Assembly name="Vuforia_MarsLanders_assembly" assemblyId="d47e9b97bf9b4ecd8afe939754eec55f">
+<Part name="Vuforia_MarsLander" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="0.00200198 0.0532643 0.375181" rotation="AD: -0.026831746404356264 -1.0352826248360243 3.84414633502294 179.792" trained="yes">
+
+</EntryPoint>
+
+</Assembly>
+<Assembly name="Vuforia_RZR_Toys_assembly" assemblyId="531fd89ee0b74baa86c1e50d877121e1">
+<Part name="Vuforia_RZR_Toy" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="-0.0949364 0.0703138 0.241212" rotation="AD: 0.9987332639052284 0.1122936832084448 -0.5154161808947686 201.809" trained="yes">
+
+</EntryPoint>
+
+</Assembly>
+<ModelTargetDatabase name="Vuforia_Marslander_RZR_Toy360" />
+</QCARConfig>

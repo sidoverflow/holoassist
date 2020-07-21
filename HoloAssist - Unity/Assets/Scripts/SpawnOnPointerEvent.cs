@@ -1,8 +1,10 @@
 ﻿using Microsoft.MixedReality.Toolkit;
 using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.SpatialAwareness;
+using Microsoft.MixedReality.Toolkit.Utilities;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 
 // Example script that spawns a prefab at the pointer hit location.
@@ -25,6 +27,8 @@ public class SpawnOnPointerEvent : MonoBehaviour
 
         public GameObject cl;
 
+        public GameObject dest;
+
         public GameObject parentObject;
 
     public void Start()
@@ -45,31 +49,21 @@ public class SpawnOnPointerEvent : MonoBehaviour
                 RaycastHit hitInfo;
                 Vector3 UiRayCastOrigin = Camera.main.transform.position;
                 Vector3 UiRayCastDirection = Camera.main.transform.forward;
-                CoreServices.SpatialAwarenessSystem.SuspendObservers();
+                //CoreServices.SpatialAwarenessSystem.SuspendObservers();
                 if (UnityEngine.Physics.Raycast(UiRayCastOrigin, UiRayCastDirection, out hitInfo))
                 {
-                    
+
                     agent = cl.GetComponent<NavMeshAgent>();
                     if (!cl.activeSelf)
                     {
                         cl.GetComponent<NavMeshAgent>().Warp(hitInfo.point);
                         cl.SetActive(true);
-                        
+
                     }
                     else
                     {
-                        cl.GetComponent<NavMeshAgent>().destination = hitInfo.point;
+                        cl.GetComponent<NavMeshAgent>().destination = dest.transform.position;
                         lr.enabled = true;
-
-                        //var HeadPosition = Camera.main.transform.position;
-                        //var GazeDirection = Camera.main.transform.forward;
-
-                        //// destination setting 
-                        //if (UnityEngine.Physics.Raycast(HeadPosition, GazeDirection, out hitInfo))
-                        //{dw
-
-                        //}   
-
 
                         // path computation 
                         path = new NavMeshPath();
@@ -87,7 +81,9 @@ public class SpawnOnPointerEvent : MonoBehaviour
                             lr.SetPosition(i, positions[i]);
 
                         }
+                        
                     }
+
                 }
                 
       

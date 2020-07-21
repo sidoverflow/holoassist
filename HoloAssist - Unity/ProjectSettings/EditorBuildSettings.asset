@@ -6,20 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/MRTK/SDK/StandardAssets/Scenes/DefaultManagerScene.unity
-    guid: ae7bb08d297fb69408695d8de0962524
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/MRTK/SDK/StandardAssets/Scenes/DefaultLightingScene.unity
-    guid: 7e54e36c44f826c438c95da79f8de638
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/MRTK/SDK/StandardAssets/Scenes/DefaultLightingScene.unity
-    guid: 7e54e36c44f826c438c95da79f8de638
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/MRTK/SDK/StandardAssets/Scenes/DefaultLightingScene.unity
-    guid: 7e54e36c44f826c438c95da79f8de638
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/Main.unity
-    guid: fd45de59b65d8ab4a8494f03afc5bd99
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Main-SM.unity
     guid: cb60ce97310d0ea48931635591395148

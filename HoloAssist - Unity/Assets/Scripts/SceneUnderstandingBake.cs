@@ -11,14 +11,14 @@ using Windows.Perception.Spatial.Preview;
 using UnityEngine.XR.WSA;
 #endif
 
-    public class SceneUnderstandingBaker : MonoBehaviour
+    public class SceneUnderstandingBake : MonoBehaviour
     {
         public GameObject parentObject;
         public GameObject markerPrefab;
         public GameObject plane;
         public Material quadMaterial;
 
-        public SceneUnderstandingBaker()
+        public SceneUnderstandingBake()
         {
             this.markers = new List<GameObject>();
             this.quads = new List<GameObject>();
