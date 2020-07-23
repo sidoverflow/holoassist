@@ -17,7 +17,7 @@ MonoBehaviour:
   recognitionConfidenceLevel: 1
   speechCommands:
   - localizationKey: 
-    keyword: Walls
+    keyword: Stairs
     keyCode: 0
     action:
       id: 0
