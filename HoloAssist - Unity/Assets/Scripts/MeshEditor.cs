@@ -6,6 +6,8 @@ using SpatialAwarenessHandler = Microsoft.MixedReality.Toolkit.SpatialAwareness.
 
 public class MeshEditor : MonoBehaviour, SpatialAwarenessHandler
 {
+
+    
     // Start is called before the first frame update
     void Start()
     {

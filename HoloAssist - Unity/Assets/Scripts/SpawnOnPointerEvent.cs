@@ -1,6 +1,7 @@
 ﻿using Microsoft.MixedReality.Toolkit;
 using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.SpatialAwareness;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,41 +16,69 @@ public class SpawnOnPointerEvent : MonoBehaviour
 
     public LineRenderer lr;
 
-    public GameObject dest;
+    public GameObject[] destinations;
+
+    private Dictionary<string, GameObject> searchDestinations =
+    new Dictionary<string, GameObject>();
+
+    private GameObject activeDestination;
+
     public TextToSpeech textToSpeech;
+
+    public GameObject importedMesh;
 
     public void Start()
     {
-        
+        foreach(GameObject gO in destinations)
+        {
+            searchDestinations.Add(gO.name, gO);
+        }
+        importedMesh.GetComponent<Renderer>().enabled = false;
         lr.enabled = false;
         textToSpeech.StartSpeaking("Welcome to HoloAssist! Say the destination out loud to see the path.");
     }
     private void Update()
     {
-        if (Vector3.SqrMagnitude(Camera.main.transform.position - dest.transform.position) < 2.8)
+        if (activeDestination != null)
         {
+            if (Vector3.SqrMagnitude(Camera.main.transform.position - activeDestination.transform.position) < 2.8)
+            {
 
-            textToSpeech.StartSpeaking("You have arrived at your destination");
+                textToSpeech.StartSpeaking("You have arrived.");
+            } 
         }
     }
 
     public async void OnStairs()
     {
-        await Spawn();
+        searchDestinations.TryGetValue("Stairs", out activeDestination);
+        await Route();
     }
 
-    async Task Spawn()
+    public async void OnBedroom()
     {
-        //RaycastHit hitInfo;
-        //Vector3 UiRayCastOrigin = Camera.main.transform.position;
-        //Vector3 UiRayCastDirection = Camera.main.transform.forward;
+        searchDestinations.TryGetValue("Bedroom", out activeDestination);
+        await Route();
+    }
 
-        //if (UnityEngine.Physics.Raycast(UiRayCastOrigin, UiRayCastDirection, out hitInfo))
-        //{
-            // path computation
+    public async void OnKitchen()
+    {
+        searchDestinations.TryGetValue("Kitchen", out activeDestination);
+        await Route();
+    }
+
+    public async void OnLiving()
+    {
+        searchDestinations.TryGetValue("Living", out activeDestination);
+        await Route();
+    }
+
+    async Task Route()
+    {
+            
             lr.enabled = true;
             path = new NavMeshPath();
-            NavMesh.CalculatePath(new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z), dest.transform.position, NavMesh.AllAreas, path);
+            NavMesh.CalculatePath(new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z), activeDestination.transform.position, NavMesh.AllAreas, path);
             positions = path.corners;
 
             // root drawing
@@ -62,7 +91,12 @@ public class SpawnOnPointerEvent : MonoBehaviour
 
                 lr.SetPosition(i, positions[i]);
             }
-        //}
+
+            if (path.corners.IsValidArray())
+            {
+                float distance = Vector3.Distance(new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z), new Vector3(activeDestination.transform.position.x, 0, activeDestination.transform.position.z));
+                textToSpeech.StartSpeaking("Calculating route! " + activeDestination.name + " is " + (float)Mathf.Round(distance * 10f) / 10f + " metres away.");
+            }
     }
 
     private static int _meshPhysicsLayer = 0;

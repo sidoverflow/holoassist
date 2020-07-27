@@ -24,21 +24,21 @@ MonoBehaviour:
       description: None
       axisConstraint: 0
   - localizationKey: 
-    keyword: Ceiling
+    keyword: Bedroom
     keyCode: 0
     action:
       id: 0
       description: None
       axisConstraint: 0
   - localizationKey: 
-    keyword: Floor
+    keyword: Kitchen
     keyCode: 0
     action:
       id: 0
       description: None
       axisConstraint: 0
   - localizationKey: 
-    keyword: Platform
+    keyword: Living
     keyCode: 0
     action:
       id: 0
