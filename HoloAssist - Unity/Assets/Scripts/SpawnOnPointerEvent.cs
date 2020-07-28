@@ -33,7 +33,7 @@ public class SpawnOnPointerEvent : MonoBehaviour
         {
             searchDestinations.Add(gO.name, gO);
         }
-        importedMesh.GetComponent<Renderer>().enabled = false;
+        //importedMesh.GetComponent<Renderer>().enabled = false;
         lr.enabled = false;
         textToSpeech.StartSpeaking("Welcome to HoloAssist! Say the destination out loud to see the path.");
     }
@@ -41,7 +41,7 @@ public class SpawnOnPointerEvent : MonoBehaviour
     {
         if (activeDestination != null)
         {
-            if (Vector3.SqrMagnitude(Camera.main.transform.position - activeDestination.transform.position) < 2.8)
+            if (Vector3.SqrMagnitude(Camera.main.transform.position - activeDestination.transform.position) < 2.8 && !textToSpeech.IsSpeaking())
             {
 
                 textToSpeech.StartSpeaking("You have arrived.");

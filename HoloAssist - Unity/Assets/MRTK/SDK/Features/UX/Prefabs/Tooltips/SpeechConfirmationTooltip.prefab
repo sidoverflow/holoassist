@@ -106,8 +106,8 @@ MonoBehaviour:
   toolTipText: Recognized Text
   backgroundPadding: {x: 0.05, y: 0.015}
   backgroundOffset: {x: 0, y: 0, z: 0}
-  contentScale: 0.6
-  fontSize: 30
+  contentScale: 0.748
+  fontSize: 36
   attachPointType: 9
   attachPointOffset: {x: 0, y: 0, z: 0}
   toolTipLine: {fileID: 812055196429508800}
