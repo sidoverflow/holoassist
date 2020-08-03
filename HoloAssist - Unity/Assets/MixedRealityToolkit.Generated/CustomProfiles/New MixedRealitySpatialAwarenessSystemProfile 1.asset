@@ -21,10 +21,3 @@ MonoBehaviour:
     priority: 0
     runtimePlatform: 8
     observerProfile: {fileID: 11400000, guid: 02414a4572b1e47468d89ff5c8e4a9ca, type: 2}
-  - componentType:
-      reference: Microsoft.MixedReality.Toolkit.SpatialObjectMeshObserver.SpatialObjectMeshObserver,
-        Microsoft.MixedReality.Toolkit.Providers.ObjectMeshObserver
-    componentName: Spatial Object Mesh Observer
-    priority: 0
-    runtimePlatform: 216
-    observerProfile: {fileID: 11400000, guid: 95f1cc15dc8db3b498b73080a323a60f, type: 2}

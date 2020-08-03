@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3c1af9621e40064b907d18085e21fb7, type: 3}
-  m_Name: New SpatialObjectMeshObserverProfile 1
+  m_Name: New SpatialObjectMeshObserverProfile 2
   m_EditorClassIdentifier: 
   isCustomProfile: 1
   startupBehavior: 0
@@ -22,7 +22,7 @@ MonoBehaviour:
   levelOfDetail: 2
   trianglesPerCubicMeter: 0
   recalculateNormals: 1
-  displayOption: 1
+  displayOption: 2
   visibleMaterial: {fileID: 2100000, guid: 47c3d3b0d8143e3489351498fceed55d, type: 2}
   occlusionMaterial: {fileID: 2100000, guid: a809c7ea182b699409443d46d5b42435, type: 2}
   spatialMeshObject: {fileID: -927199367670048503, guid: 4c9ceb375524bbf43bf1545638d24675,

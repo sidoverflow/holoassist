@@ -1,12 +1,9 @@
 ﻿using Microsoft.MixedReality.Toolkit;
-using Microsoft.MixedReality.Toolkit.Input;
-using Microsoft.MixedReality.Toolkit.SpatialAwareness;
+using Microsoft.MixedReality.Toolkit.Utilities;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
-[AddComponentMenu("Scripts/MRTK/Examples/SpawnOnPointerEvent")]
 public class SpawnOnPointerEvent : MonoBehaviour
 {
     // Path, coordinate list, route display Renderer
@@ -33,7 +30,6 @@ public class SpawnOnPointerEvent : MonoBehaviour
         {
             searchDestinations.Add(gO.name, gO);
         }
-        //importedMesh.GetComponent<Renderer>().enabled = false;
         lr.enabled = false;
         textToSpeech.StartSpeaking("Welcome to HoloAssist! Say the destination out loud to see the path.");
     }
@@ -41,65 +37,73 @@ public class SpawnOnPointerEvent : MonoBehaviour
     {
         if (activeDestination != null)
         {
-            if (Vector3.SqrMagnitude(Camera.main.transform.position - activeDestination.transform.position) < 2.8 && !textToSpeech.IsSpeaking())
+            if (Vector3.SqrMagnitude(Camera.main.transform.position - activeDestination.transform.position) < 2.7 && !textToSpeech.IsSpeaking())
             {
 
                 textToSpeech.StartSpeaking("You have arrived.");
+                lr.enabled = false;
+                activeDestination = null;
             } 
         }
     }
 
-    public async void OnStairs()
+    public void OnStairs()
     {
         searchDestinations.TryGetValue("Stairs", out activeDestination);
-        await Route();
+        Route();
     }
 
-    public async void OnBedroom()
+    public void OnBedroom()
     {
         searchDestinations.TryGetValue("Bedroom", out activeDestination);
-        await Route();
+        Route();
     }
 
-    public async void OnKitchen()
+    public void OnKitchen()
     {
         searchDestinations.TryGetValue("Kitchen", out activeDestination);
-        await Route();
+        Route();
     }
 
-    public async void OnLiving()
+    public void OnLiving()
     {
         searchDestinations.TryGetValue("Living", out activeDestination);
-        await Route();
+        Route();
     }
 
-    async Task Route()
+    async void Route()
     {
-            
-            lr.enabled = true;
-            path = new NavMeshPath();
-            NavMesh.CalculatePath(new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z), activeDestination.transform.position, NavMesh.AllAreas, path);
-            positions = path.corners;
 
-            // root drawing
-            lr.widthMultiplier = 0.1F;
-            lr.positionCount = positions.Length;
+        lr.enabled = true;
+        path = new NavMeshPath();
+        Debug.LogWarning("The origin is: " + new Vector3(Camera.main.transform.position.x, -0.7f, Camera.main.transform.position.z));
+        Debug.LogWarning("The destination is: " + new Vector3(activeDestination.transform.position.x, -0.7f, activeDestination.transform.position.z));
+        NavMesh.CalculatePath(new Vector3(Camera.main.transform.position.x, -0.7f, Camera.main.transform.position.z), new Vector3(activeDestination.transform.position.x, -0.7f, activeDestination.transform.position.z), NavMesh.AllAreas, path);
+        positions = path.corners;
 
-            for (int i = 0; i < positions.Length; i++)
-            {
-                Debug.Log("point" + i + "=" + positions[i]);
+        // root drawing
+        lr.widthMultiplier = 0.1F;
+        lr.positionCount = positions.Length;
 
-                lr.SetPosition(i, positions[i]);
-            }
+        for (int i = 0; i < positions.Length; i++)
+        {
+            Debug.Log("point" + i + "=" + positions[i]);
 
-            if (path.corners.IsValidArray())
-            {
-                float distance = Vector3.Distance(new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z), new Vector3(activeDestination.transform.position.x, 0, activeDestination.transform.position.z));
-                textToSpeech.StartSpeaking("Calculating route! " + activeDestination.name + " is " + (float)Mathf.Round(distance * 10f) / 10f + " metres away.");
-            }
+            lr.SetPosition(i, positions[i]);
+        }
+
+        if (path.corners.IsValidArray())
+        {
+            float distance = Vector3.Distance(new Vector3(Camera.main.transform.position.x, -1.571f, Camera.main.transform.position.z), new Vector3(activeDestination.transform.position.x, 0, activeDestination.transform.position.z));
+            textToSpeech.StartSpeaking("Calculating route! " + activeDestination.name + " is " + (float)Mathf.Round(distance * 10f) / 10f + " metres away.");
+        }
+        else
+        {
+            textToSpeech.StartSpeaking("Could not find a route to " + activeDestination.name + " Try again after moving around a couple of steps.");
+        }
     }
 
-    private static int _meshPhysicsLayer = 0;
+/*    private static int _meshPhysicsLayer = 0;
 
     private static int GetSpatialMeshMask()
     {
@@ -133,5 +137,5 @@ public class SpawnOnPointerEvent : MonoBehaviour
             return hitInfo.point;
         }
         return null;
-    }
+    }*/
 }

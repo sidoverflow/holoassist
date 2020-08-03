@@ -1,7 +1,6 @@
 ﻿using Microsoft.MixedReality.Toolkit;
 using Microsoft.MixedReality.Toolkit.SpatialAwareness;
 using UnityEngine;
-using UnityEngine.AI;
 using SpatialAwarenessHandler = Microsoft.MixedReality.Toolkit.SpatialAwareness.IMixedRealitySpatialAwarenessObservationHandler<Microsoft.MixedReality.Toolkit.SpatialAwareness.SpatialAwarenessMeshObject>;
 
 public class MeshEditor : MonoBehaviour, SpatialAwarenessHandler
@@ -35,6 +34,7 @@ public class MeshEditor : MonoBehaviour, SpatialAwarenessHandler
     public void OnObservationAdded(MixedRealitySpatialAwarenessEventData<SpatialAwarenessMeshObject> eventData)
     {
         eventData.SpatialObject.GameObject.AddComponent<NavMeshSourceTag>();
+        Debug.Log(eventData.SpatialObject.GameObject.name);
     }
 
     public void OnObservationUpdated(MixedRealitySpatialAwarenessEventData<SpatialAwarenessMeshObject> eventData)
@@ -43,6 +43,7 @@ public class MeshEditor : MonoBehaviour, SpatialAwarenessHandler
         if (checkNavMeshSourceTag == null)
         {
             eventData.SpatialObject.GameObject.AddComponent<NavMeshSourceTag>();
+            Debug.Log(eventData.SpatialObject.GameObject.name + "UPDATED MF");
         }
         
     }
