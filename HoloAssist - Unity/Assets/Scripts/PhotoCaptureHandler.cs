@@ -80,7 +80,7 @@ public class PhotoCaptureHandler : MonoBehaviour
             Debug.Log("OnCapturedPhotoToMemory " + imageBufferList.Count);
 
             //Execute OCR Coroutine
-            ExecuteMCSComputerVisionOCR(imageBufferList, "ocr");
+            ExecuteMCSComputerVisionOCR(imageBufferList);
         }
         else
         {
@@ -90,12 +90,30 @@ public class PhotoCaptureHandler : MonoBehaviour
         photoCapture.StopPhotoModeAsync(OnStoppedPhotoMode);
     }
 
-    public void ExecuteMCSComputerVisionOCR(List<byte> imageBufferList, string type)
+    public void ExecuteMCSComputerVisionOCR(List<byte> imageBufferList)
     {
-        Debug.Log("Started PostToComputerVision OCR processing");
-        MCSCognitiveServices mCSPostApi = new MCSCognitiveServices();
-        StartCoroutine(mCSPostApi.PostToComputerVisionOCR(imageBufferList.ToArray(), type));
-        Debug.Log("Ended PostToComputerVision OCR processing coroutine");
+        if (this.gameObject.name == "DetectManager")
+        {
+            Debug.Log("Started PostToComputerVision OCR processing");
+            MCSCognitiveServices mCSPostApi = gameObject.GetComponent<MCSCognitiveServices>();
+            StartCoroutine(mCSPostApi.MakeAnalysisRequest(imageBufferList.ToArray()));
+            Debug.Log("Ended PostToComputerVision OCR processing coroutine");
+        }
+        else if (this.gameObject.name == "OCRManager")
+        {
+            Debug.Log("Started PostToComputerVision OCR processing");
+            MCSCognitiveServices mCSPostApi = gameObject.GetComponent<MCSCognitiveServices>();
+            StartCoroutine(mCSPostApi.PostToComputerVisionOCR(imageBufferList.ToArray()));
+            Debug.Log("Ended PostToComputerVision OCR processing coroutine");
+        }
+        else
+        {
+            Debug.Log("Started PostToComputerVision OCR processing");
+            MCSCognitiveServices mCSPostApi = gameObject.GetComponent<MCSCognitiveServices>();
+            StartCoroutine(mCSPostApi.PersonAnalysisRequest(imageBufferList.ToArray()));
+            Debug.Log("Ended PostToComputerVision OCR processing coroutine");
+        }
+        
     }
 
 }

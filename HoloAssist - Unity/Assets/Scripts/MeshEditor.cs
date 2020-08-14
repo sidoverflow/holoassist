@@ -43,7 +43,7 @@ public class MeshEditor : MonoBehaviour, SpatialAwarenessHandler
         if (checkNavMeshSourceTag == null)
         {
             eventData.SpatialObject.GameObject.AddComponent<NavMeshSourceTag>();
-            Debug.Log(eventData.SpatialObject.GameObject.name + "UPDATED MF");
+            Debug.Log(eventData.SpatialObject.GameObject.name + ":  updated mesh");
         }
         
     }
